@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>tooltip - a javascript tooltip with douban.com style based on jQuery 1.3.2+</title>
+    <link rel="stylesheet" type="text/css" href="css/tooltip.css" />
+    <style type="text/css">
+    	* {
+            margin: 0;
+            padding: 0;
+    	}
+    	body {
+            background: #FFF;
+            font: 12px/162% Arial,Helvetica,sans-serif;
+    	}
+    	p {
+            margin: 0 0 10px;
+    	}
+    	img {
+    	   border: 0;
+    	}
+    	.doc {
+    	   width: 650px;
+    	   margin: 100px auto 50px;
+    	}
+    	.mod-banner {
+    	   position: fixed;
+    	   z-index: 99998;
+    	   _position: absolute;
+    	   width: 100%;
+    	   height: 55px;
+    	   padding-top: 20px;
+    	   left: 0;
+    	   top: 0;
+    	   text-align: center;
+    	   background: #333;
+    	   color: #FFF;
+    	}
+    	.doc h2 {
+    	   margin-top: 25px;
+    	}
+    	.mod-book a {
+    	   display: block;
+    	   width: 118px;
+    	   height: 125px;
+    	}
+    	.mod-code pre {
+    	   margin: 15px 0;
+    	   padding: 5px 5px 5px 10px;
+    	   border-left: 5px solid #CCC;
+    	   word-wrap: break-word;
+    	   white-space: pre-wrap;
+    	}
+    	#fork {
+            position: fixed;
+            _position: absolute;
+            right: 0;
+            top: 0;
+            z-index: 99999;
+        }
+    	
+    	/* 提示框的内容样式，请自行定义 */
+    	.detail-tip {
+            display: none;
+            width: 300px;
+            padding: 13px 13px 10px;
+            word-wrap: break-word;
+    	}
+    	.detail-tip .color-gray {
+    	   color: #666;
+    	}
+    	.detail-tip h2 {
+            color: #006600;
+            font: 14px/150% Arial,Helvetica,sans-serif;
+            margin: 0 0 12px;
+    	}
+    </style>
+</head>
+<body>
+<div class="doc">
+    <div class="mod-banner">
+        <h1>tooltip</h1>
+        <p>a javascript tooltip with douban.com style based on jQuery 1.3.2+.</p>
+    </div>
+
+    <h2>演示 Demo</h2>
+    <div class="mod-book">
+        <a id="target" href="http://book.douban.com/subject/7058465/" fn-tooltip=".detail-tip">
+            <img alt="爸爸的木朵" src="http://img3.douban.com/mpic/s8869276.jpg" />
+            <div class="detail-tip">
+                <h2>爸爸的木朵</h2>
+                <p class="color-gray">速写本子 / 2012-3 / 华侨出版社 / 36.8 / 平装</p>
+                <p>“我有一个女儿，我一定好好爱她。”这不是煽情，只是一个父亲心情。父爱不仅是一种态度，也是一种力量。@速写本子用绘画的方式把女儿木朵生活中的点点滴滴，用速写画的方式表现，画出木朵的可爱、木朵的调皮、木朵的求知欲、以及木朵生活中的小故事。画风温馨治愈，很萌很有爱，透着温暖 人心的力量。赋予了绘画之后的人生感悟和一位父亲对女儿含蓄，内敛的爱。表...</p>
+            </div>
+        </a>
+    </div>
+    
+    <h2>载入 Init</h2>
+    <div class="mod-code">
+        <pre>
+&lt;link rel="stylesheet" type="text/css" href="css/tooltip.css" /&gt;
+&lt;script src="js/jquery.js"&gt;&lt;/script&gt;
+&lt;script src="js/tooltip.js"&gt;&lt;/script&gt;
+        </pre>
+    </div>
+    
+    <h2>配置 Config</h2>
+    <div class="mod-code">
+        <pre>
+$('#target').tooltip({
+    content: undefined,   // 要显示的提示信息，可以为 jQuery 对象或选择符
+    event: 'hover',       // 提示显示的触发事件，可以为 hover（鼠标移上去）或 click（点击）
+    width: 'auto',        // 提示的宽度
+    height: 'auto',       // 提示的高度
+    direction: 'right',   // 提示显示的位置，仅支持 left（靠左显示） 和 right（靠右显示）
+    distance: 15,         // 提示框与当前元素的间隔
+    delay: 200,           // 当触发事件为 hover 时，延时多少显示<strong>（暂未支持！）</strong>
+    prefix: 'fn-tooltip'  // 样式类的前缀，一般情况下无需提供
+});
+        </pre>
+    </div>
+    <p>
+        <strong>特殊说明</strong>
+        <br />content 配置项的取值顺序为：优先在目标内部查找；其次为目标的同级元素；最后为全局查找。在使用 jQuery 选择符时推荐仅捕获一个元素。
+        <br />出于适用性考虑，高宽并不自动计算，提示框内的边距之类也没有预设，推荐自定义提示元素的高宽和样式。
+    </p>
+    
+    <h2>用法 Usage</h2>
+    <div class="mod-code">
+        <pre>
+/* 基于约定的自动初始化，无需手动调用 */
+// html
+&lt;a href="http://book.douban.com/subject/7014927/" fn-tooltip=".detail-tip"&gt;
+    &lt;img alt="中国神话传说" src="http://img1.douban.com/mpic/s7007041.jpg" /&gt;
+    &lt;div class="detail-tip"&gt;
+        &lt;h2&gt;中国神话传说&lt;/h2&gt;
+        &lt;p class="color-gray"&gt;袁珂 / 2012-1-1 / 世界图书出版公司 / 49.80元 / 平装&lt;/p&gt;
+        &lt;p&gt;《中国神话传说:从盘古到秦始皇》是中国神话学专家袁珂先生一生研究成果的集大成之作。其因专业系统且通俗易懂，出版三十年来，受到了国内外读者的广泛欢迎，并且被翻译成俄、日、韩等多种语言。1983年，在《中国神话传说》基础上历经两次重要增补修订而成的《中国神话传说》一书，内容已达原来的四倍，字数六十余万。作者对浩瀚的古文献资料，考辨真伪，订正讹误，...&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/a&gt;
+
+
+/* 手动初始化，以上面的结构为例（实际使用中，上面的例子会自动初始化） */
+$('[fn-tooltip]').each(function() {
+    var self = $(this), tooltip = $(self.attr('fn-tooltip'));
+    tooltip.length && self.tooltip({
+        content: tooltip
+    });
+});
+
+
+/* 手动初始化，并在外部控制提示是否自动关闭 */
+var tooltip = $('#target').tooltip({
+    content: '.detail-tip'
+});
+// 当某个按钮点击时，切换提示自动关闭状态
+$('#autohide_onoff').click(function() {
+    tooltip.data('tooltip.autohide', !!! tooltip.data('tooltip.autohide'));
+});
+        </pre>
+    </div>
+    
+    <h2>下载 Download</h2>
+    <p><br /><a href="https://github.com/micate/tooltip">代码托管在 Github 上</a>，<a href="https://github.com/micate/tooltip/zipball/master">直接下载</a>。如遇到问题欢迎 <a href="https://github.com/micate/tooltip/issues">提交 issue</a>。</p>
+</div>
+<a id="fork" href="https://github.com/micate/tooltip">
+    <img src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub">
+</a>
+<script src="js/jquery.js"></script>
+<script src="js/tooltip.js"></script>
+</body>
+</html>
